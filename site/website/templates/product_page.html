@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename=product.image) }}" 
+                 class="img-fluid rounded shadow" 
+                 alt="{{ product.name }}" style="max-height: 500px; object-fit: cover;">
+        </div>
+        
+        <div class="col-md-6">
+            <div class="p-4">
+                <h2 class="fw-bold mb-3">{{ product.name }}</h2>
+                
+                <p class="fs-4 text-success mb-3"><strong>Preço:</strong> R${{ product.price }}</p>
+                
+                <p class="text-muted">{{ product.description }}</p>
+                
+                <form action="{{ url_for('auth.add_to_cart', product_id=product.id) }}" method="POST">
+                <button type="submit" class="btn btn-primary btn-lg mt-3">Adicionar ao carrinho</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

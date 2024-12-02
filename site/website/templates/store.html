@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Loja{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Loja</h1>
+    <div class="row">
+      {% for product in products %}
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ url_for('static', filename=product.image) }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="{{ url_for('auth.product_page', product_id=product.id) }}" class="text-decoration-none">{{ product.name }}</a>
+              </h5>
+              <p class="card-text">R${{ product.price }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

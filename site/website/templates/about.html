@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre nós{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Sobre nós</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <p>
+        <img src="{{ url_for('static', filename='images/about1.png') }}" alt="Top Left Image" class="float-left mr-3 mb-3" />
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Nulla vitae massa at nunc viverra ullamcorper. Suspendisse potenti. Integer in mauris eu nibh euismod gravida. Sed ac risus. 
+        <br /><br />
+        Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce id purus. Nullam sit amet turpis elementum, convallis orci in, sodales arcu. Cras vestibulum bibendum augue, quis viverra magna laoreet ac. Suspendisse commodo eros eu sem tempor lacinia. Etiam in enim at velit fermentum dapibus. 
+        <img src="{{ url_for('static', filename='images/end1.png') }}" alt="Bottom Right Image" class="float-right ml-3 mt-3" />
+        Mauris aliquet mi sit amet sem gravida ultricies. Etiam est orci, sollicitudin sit amet neque et, vehicula tristique elit. Suspendisse potenti. Cras accumsan orci nec risus euismod, in cursus leo accumsan. Aenean quis augue enim. Cras sodales mi eu odio tempus lobortis. Etiam vehicula sit amet justo nec feugiat.
+      </p>
+    </div>
+  </div>
+{% endblock %}

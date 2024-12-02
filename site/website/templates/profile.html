@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Perfil</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Nome: {{ user.first_name }}</h5>
+            <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#changeFirstNameModal">Mudar nome</button>
+            
+            <h5 class="card-title">Email: {{ user.email }}</h5>
+            <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#changeEmailModal">Mudar email</button>
+            
+            <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#changePasswordModal">Mudar senha</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeFirstNameModal" tabindex="-1" role="dialog" aria-labelledby="changeFirstNameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeFirstNameModalLabel">Mudar nome</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('auth.change_first_name') }}">
+                    <div class="form-group">
+                        <label for="newFirstName">Novo nome</label>
+                        <input type="text" class="form-control" id="newFirstName" name="newFirstName" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar alteração</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="changeEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeEmailModalLabel">Mudar email</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('auth.change_email') }}">
+                    <div class="form-group">
+                        <label for="newEmail">Novo email</label>
+                        <input type="email" class="form-control" id="newEmail" name="newEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar alteração</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Mudar senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('auth.change_password') }}" onsubmit="return validatePassword()">
+                    <div class="form-group">
+                        <label for="currentPassword">Senha atual</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Nova senha</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Nova senha(Confirmar)</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <small>A senha deve ter pelo menos 7 caracteres</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar alteraçãos</button>
+                </form>
+                <div id="passwordMismatchError" class="text-danger" style="display:none;">Senhas não são iguais.</div>
+                <div id="passwordLengthError" class="text-danger" style="display:none;">A senha deve ter pelo menos 7 caracteres</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validatePassword() {
+        var newPassword = document.getElementById('newPassword').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var passwordLengthError = document.getElementById('passwordLengthError');
+        var passwordMismatchError = document.getElementById('passwordMismatchError');
+
+        if (newPassword !== confirmPassword) {
+            passwordMismatchError.style.display = 'block';
+            passwordLengthError.style.display = 'none';
+            return false;
+        }
+
+        if (newPassword.length < 7) {
+            passwordLengthError.style.display = 'block';
+            passwordMismatchError.style.display = 'none';
+            return false;
+        }
+
+        passwordMismatchError.style.display = 'none';
+        passwordLengthError.style.display = 'none';
+        return true;
+    }
+</script>
+
+{% endblock %}
